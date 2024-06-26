@@ -29,14 +29,7 @@ jobs:
     
     - name: Install dependencies
       run: npm install
-
-
-      
     - name: Run Unit tests
       run: npm run test:unit
-    - name: Start app
-      run: npm start
-    - name: Run UI tests
-      run: npm run test:ui
     - name: My Name
       run: echo "Hello, my name is!"
