@@ -34,9 +34,9 @@ jobs:
       run: npm run test:unit
 
     - name: Start the app
-        run: npm start &
-        env:
-          CI: true
+      run: npm start &
+      env:
+        CI: true
 
     - name: Wait for the app to be ready
       run: |
