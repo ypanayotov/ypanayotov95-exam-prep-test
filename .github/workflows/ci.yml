@@ -27,12 +27,16 @@ jobs:
       run: |
         npm install
         npx playwright install
-
     - name: Upload build artifacts
+        run: |
+          zip -r build-artifacts.zip node_modules/ package.json package-lock.json ./
+          echo "::set-env name=ARTIFACT_NAME::build-artifacts.zip"
+          echo "::set-env name=ARTIFACT_PATH::build-artifacts.zip"
+    - name: Upload build 
         uses: actions/upload-artifact@v3
         with:
-          name: build-artifacts
-          path: .
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACT_PATH }}
 
   test:  
     runs-on: ubuntu-latest
