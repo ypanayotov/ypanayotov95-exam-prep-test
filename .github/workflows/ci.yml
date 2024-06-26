@@ -33,10 +33,10 @@ jobs:
 
       
     - name: Run Unit tests
-      run: npm test:unit
+      run: npm run test:unit
     - name: Start app
       run: npm start
     - name: Run UI tests
-      run: npm test:ui
+      run: npm run test:ui
     - name: My Name
       run: echo "Hello, my name is!"
