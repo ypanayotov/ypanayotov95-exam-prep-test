@@ -27,6 +27,7 @@ jobs:
       run: |
         npm install
         npx playwright install
+
     - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -35,7 +36,7 @@ jobs:
             node_modules/
             package.json
             package-lock.json
-            .  # Upload the entire working directory, adjust as needed
+            . 
 
   test:  
     runs-on: ubuntu-latest
