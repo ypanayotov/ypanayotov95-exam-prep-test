@@ -27,6 +27,15 @@ jobs:
       run: |
         npm install
         npx playwright install
+    - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            node_modules/
+            package.json
+            package-lock.json
+            .  # Upload the entire working directory, adjust as needed
 
   test:  
     runs-on: ubuntu-latest
@@ -36,6 +45,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifacts
+          path: .  # Download to the current working directory
     - name: Run Unit tests
       run: npm run test:unit
 
