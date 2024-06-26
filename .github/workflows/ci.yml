@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,25 +27,7 @@ jobs:
       run: |
         npm install
         npx playwright install
-    - name: Upload build 
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-artifacts
-        path: .
 
-  test:  
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Download build artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: build-artifacts
-        path: .  # Download to the current working directory
     - name: Run Unit tests
       run: npm run test:unit
 
@@ -72,7 +54,7 @@ jobs:
 
   deploy:
       runs-on: ubuntu-latest
-      needs: test
+      needs: build-and-test
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       steps:
         - name: Checkout code
