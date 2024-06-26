@@ -47,10 +47,10 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifacts
-          path: .  # Download to the current working directory
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifacts
+        path: .  # Download to the current working directory
     - name: Run Unit tests
       run: npm run test:unit
 
