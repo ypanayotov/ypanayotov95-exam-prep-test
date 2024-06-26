@@ -36,7 +36,9 @@ jobs:
       run: npm run test:unit
 
     - name: Start the app
-      run: npm start &
+      run: |
+        npm start &
+        echo $! > pid.txt
       env:
         CI: true
 
@@ -49,7 +51,7 @@ jobs:
       run: npm run test:ui
 
     - name: Stop the app
-      run: kill $(jobs -p)
+      run: kill $(cat pid.txt)
 
     - name: My Name
       run: echo "Hello, my name is!"
